@@ -5,18 +5,15 @@ import LandingScreenTwo from './Screens.js/OnboardingScreens/LandingScreenTwo';
 import LandingScreenThree from './Screens.js/OnboardingScreens/LandingScreenThree';
 import LandingScreenFour from './Screens.js/OnboardingScreens/LandingScreenFour';
 import SignUpScreen from './Screens.js/SignUpScreen/SignUpScreen';
+import Screen from "./Components/Screen"
+import MoreAboutUser from './Screens.js/SignUpScreen/MoreAboutUser';
 
 export default function App() {
   return (
-    <View style={styles.container}>
+    <Screen>
       <SignUpScreen/>
-    </View>
+    </Screen>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-   
-  },
-});
+

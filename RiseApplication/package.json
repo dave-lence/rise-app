@@ -12,6 +12,7 @@
     "@react-native-community/checkbox": "^0.5.16",
     "expo": "~49.0.7",
     "expo-checkbox": "~2.4.0",
+    "expo-constants": "^14.4.2",
     "expo-status-bar": "~1.6.0",
     "formik": "^2.4.3",
     "react": "18.2.0",

@@ -1,8 +1,9 @@
 import { View, Text, TextInput, TouchableOpacity } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 const AppTextInput = ({style,  icon, showPass, secureTextEntry, iconName, ...otherProps }) => {
+    const [focus, setFocus] = useState(false)
   return (
     <View
       style={[{
@@ -11,8 +12,8 @@ const AppTextInput = ({style,  icon, showPass, secureTextEntry, iconName, ...oth
         marginVertical: 10,
         borderRadius: 5,
         flexDirection: "row",
-        // borderColor:"#0898A0",
-        // borderWidth:1,
+        borderColor: focus ? "#0898A0" : undefined,
+        borderWidth:focus ? 1 : 0,
       }, style]}
     >
       <TextInput
@@ -20,6 +21,12 @@ const AppTextInput = ({style,  icon, showPass, secureTextEntry, iconName, ...oth
         style={{ fontSize: 14, fontWeight:"500",  flex: 1 }}
         {...otherProps}   
         secureTextEntry={secureTextEntry}
+        onFocus={() => {
+         setFocus(true)
+        }}
+        onBlur={() => {
+            setFocus(false)
+        }}
       />
 
       {icon && (
