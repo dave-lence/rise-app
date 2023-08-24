@@ -8,7 +8,7 @@ import {
 import React from "react";
 
 
-const LandingScreenFour = () => {
+const LandingScreenFour = ({navigation}) => {
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "#F6FFFE", padding: 20 }}>
       <View

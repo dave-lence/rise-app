@@ -35,17 +35,18 @@ const SignUpScreen = () => {
     } else if (!values.password) {
       setValid(false);
     } else if (!passwordRegex.test(values.password)) {
-    //   setValid(false);
-      setValid8char(false)
+      setValid(false);
+      setValid8char(false);
     } else if (!/[A-Z]/.test(values.password)) {
-        setValid(false);
-      setValidUpperCase(false)
+      setValid(false);
+      setValidUpperCase(false);
     } else {
-        setValid8char(true);
-        setValidUpperCase(true);
+      setValid8char(true);
+      setValidUpperCase(true);
       setValid(true);
     }
   };
+
   return (
     <ScrollView style={{ flex: 1, padding: 20 }}>
       {/* top description */}
@@ -73,9 +74,10 @@ const SignUpScreen = () => {
           validationSchema={validationSchema}
           validate={(values) => {
             checkValid(values);
+            console.log(values);
           }}
           onSubmit={(value) => {
-            console.log(value);
+            // console.log(value);
           }}
         >
           <AppFormFields
@@ -133,10 +135,14 @@ const CheckBoxFields = ({ description, value, onValueChange }) => {
   return (
     <View style={{ flexDirection: "row", marginTop: 10 }}>
       <Checkbox
-      disabled
+        disabled
         value={value}
         onValueChange={onValueChange}
-        style={{ borderRadius: 50, marginRight: 10, backgroundColor:"#0898A0" }}
+        style={{
+          borderRadius: 50,
+          marginRight: 10,
+          backgroundColor: "#0898A0",
+        }}
       />
       <Text style={{ fontWeight: "400", fontSize: 13 }}>{description}</Text>
     </View>

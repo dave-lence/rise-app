@@ -1,11 +1,13 @@
 import { View, Text, SafeAreaView, ImageBackground } from "react-native";
-import React from "react";
+import React, { useEffect } from "react"
 
+const LandingScreen = ({navigation}) => {
 
-
-
-const LandingScreen = () => {
-
+   useEffect(() => {
+    setTimeout(() => {
+      navigation.navigate("WelcomeTwo")
+    }, 5000);
+   })
 
   return (
     <SafeAreaView style={{flex:1}}>
