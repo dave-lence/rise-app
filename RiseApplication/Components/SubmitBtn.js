@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, Pressable } from "react-native";
+import { Text, Pressable, TouchableOpacity } from "react-native";
 import React, { useState } from "react";
 import { useFormikContext } from "formik";
 
@@ -7,7 +7,7 @@ const SubmitBtn = ({ title, style, disabled, onPress }) => {
 
   return (
     <Pressable
-      style={({pressed}) => [
+      style={[
         {
           alignSelf: "center",
           alignItems: "center",
@@ -15,18 +15,15 @@ const SubmitBtn = ({ title, style, disabled, onPress }) => {
           backgroundColor: "#0898A0",
           opacity: disabled ? 0.4 : 1,
           padding: 16,
-          width: 335,
+          width: 355,
           marginTop: 50,
         },
         style,
-        { backgroundColor: pressed ? "gray" : "white" },
       ]}
-     
       android_ripple={{ color: "white" }}
       disabled={disabled}
-      onPress={() => {
-        handleSubmit, onPress;
-      }}
+      onPress={handleSubmit}
+    
     >
       <Text style={{ color: "white", fontWeight: "500" }}>{title}</Text>
     </Pressable>

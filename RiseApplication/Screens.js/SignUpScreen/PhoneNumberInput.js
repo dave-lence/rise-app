@@ -14,7 +14,6 @@ const PhoneNumberInput = ({ref, defaultValue, onChangeText}) => {
             layout="first"
             onChangeText={onChangeText}
             withDarkTheme
-            autoFocus
             containerStyle={{
               width: "100%",
               height: 53,

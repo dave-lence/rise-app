@@ -6,13 +6,13 @@ import {
   TouchableOpacity,
 } from "react-native";
 import React from "react";
+import { ww } from "../../responsive";
 
-
-const LandingScreenFour = ({navigation}) => {
+const LandingScreenFour = ({ navigation }) => {
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: "#F6FFFE", padding: 20 }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: "#F6FFFE", paddingHorizontal: ww(20) }}>
       <View
-        style={{ alignSelf: "center", marginTop: 100, height: 300, width: 300 }}
+        style={{ alignSelf: "center", marginTop: ww(100), height: ww(300), width: ww(300) }}
       >
         <Image
           source={require("../../assets/image48.png")}
@@ -20,13 +20,13 @@ const LandingScreenFour = ({navigation}) => {
         />
       </View>
 
-      <View style={{ marginTop: 50 }}>
+      <View style={{ marginTop: ww(50) }}>
         <Text
           style={{
             color: "#0898A0",
             fontStyle: "normal",
             fontWeight: "500",
-            fontSize: 20,
+            fontSize: ww(20),
           }}
         >
           Better Performance
@@ -34,8 +34,8 @@ const LandingScreenFour = ({navigation}) => {
         <Text
           style={{
             lineHeight: 20,
-            marginTop: 10,
-            fontSize: 15,
+            marginTop: ww(10),
+            fontSize: ww(15),
             fontWeight: "400",
           }}
         >
@@ -44,15 +44,13 @@ const LandingScreenFour = ({navigation}) => {
         </Text>
       </View>
 
-      
-
       {/* buttons */}
       <View
         style={{
-          gap:10,
+          gap: 10,
           justifyContent: "space-between",
           alignItems: "center",
-          marginTop: 100,
+          marginTop: ww(100),
         }}
       >
         <TouchableOpacity
@@ -61,11 +59,12 @@ const LandingScreenFour = ({navigation}) => {
             backgroundColor: "#0898A0",
             padding: 16,
             borderRadius: 5,
-            width:335,
-            alignItems:"center"
+            width: ww(335),
+            alignItems: "center",
           }}
+          onPress={() => navigation.navigate("SignUp")}
         >
-          <Text style={{color:"#fff", fontWeight:"500"}}>Sign Up</Text>
+          <Text style={{ color: "#fff", fontWeight: "500" }}>Sign Up</Text>
         </TouchableOpacity>
 
         <TouchableOpacity
@@ -74,12 +73,12 @@ const LandingScreenFour = ({navigation}) => {
             backgroundColor: "rgba(113, 135, 156, 0.10)",
             padding: 16,
             borderRadius: 5,
-            width:335,
-            alignItems:"center"
+            width: ww(335),
+            alignItems: "center",
           }}
+          onPress={() => navigation.navigate("Login")}
         >
-          <Text style={{ color: "#0898A0", fontWeight:"500" }}>Sign In</Text>
-          
+          <Text style={{ color: "#0898A0", fontWeight: "500" }}>Sign In</Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>

@@ -7,10 +7,11 @@ import {
 } from "react-native";
 import React from "react";
 import { Ionicons } from "@expo/vector-icons";
+import { ww } from "../../responsive";
 
 const LandingScreenThree = ({ navigation }) => {
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: "#FDF4F9", padding: 20 }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: "#FDF4F9", paddingHorizontal: ww(20) }}>
       <View
         style={{ alignSelf: "center", marginTop: 100, height: 300, width: 300 }}
       >

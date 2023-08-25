@@ -1,13 +1,14 @@
 import { View, Text, TextInput, TouchableOpacity } from "react-native";
 import React, { useState } from "react";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { ww } from "../responsive";
 
 const AppTextInput = ({style,  icon, showPass, secureTextEntry, iconName, ...otherProps }) => {
     const [focus, setFocus] = useState(false)
   return (
     <View
       style={[{
-        padding: 10,
+        padding: ww(15),
         backgroundColor: "rgba(113, 135, 156, 0.10)",
         marginVertical: 10,
         borderRadius: 5,

@@ -3,7 +3,7 @@ import React, { useRef, useEffect } from "react";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import Button from "../../Components/Button";
 
-const SignUpScuccesfulScreen = () => {
+const SignUpScuccesfulScreen = ({navigation}) => {
   const bounceValue = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
@@ -67,7 +67,7 @@ const SignUpScuccesfulScreen = () => {
         </View>
       </View>
 
-      <Button title={"Okay"} style={{marginTop:250 }} />
+      <Button title={"Okay"} style={{marginTop:250 }} onPress={() => navigation.navigate()} />
     </View>
   );
 };

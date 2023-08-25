@@ -1,3 +1,5 @@
+import { GestureHandlerRootView } from "react-native-gesture-handler";
+
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
 import LandingScreen from "./Screens.js/OnboardingScreens/LandingScreen";
@@ -11,13 +13,17 @@ import LoginScreen from "./Screens.js/LoginScreen/LoginScreen";
 import SignUpScuccesfulScreen from "./Screens.js/SignUpScreen/SignUpScuccesfulScreen";
 import Auth from "./Navigation/Auth";
 import { NavigationContainer } from "@react-navigation/native";
+import HomeScreen from "./Screens.js/HomeScreen/HomeScreen";
+import { myTheme } from "./Navigation/NavigationTheme";
+import CreatePlanScreen from "./Screens.js/CreatePlanScreen/CreatePlanScreen";
 
 export default function App() {
   return (
-    <NavigationContainer>
+    <NavigationContainer theme={myTheme}>
       <Screen>
-        <Auth />
+        <CreatePlanScreen />
       </Screen>
+      {/* <Auth /> */}
     </NavigationContainer>
   );
 }

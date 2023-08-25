@@ -1,8 +1,6 @@
 import {
   View,
   Text,
-  SafeAreaView,
-  TouchableOpacity,
   ScrollView,
 } from "react-native";
 import React, { useState } from "react";
@@ -11,8 +9,9 @@ import * as Yup from "yup";
 import AppFormik from "../../Components/AppFormik";
 import AppFormFields from "../../Components/AppFormFields";
 import SubmitBtn from "../../Components/SubmitBtn";
+import { ww } from "../../responsive";
 
-const SignUpScreen = () => {
+const SignUpScreen = ({navigation}) => {
   const validationSchema = Yup.object().shape({
     email: Yup.string().required().email().label("Email"),
     password: Yup.string()
@@ -77,7 +76,7 @@ const SignUpScreen = () => {
             console.log(values);
           }}
           onSubmit={(value) => {
-            // console.log(value);
+            navigation.navigate("MoreAbout")
           }}
         >
           <AppFormFields
@@ -121,6 +120,11 @@ const SignUpScreen = () => {
           {/* sign up button */}
           <SubmitBtn title={"Sign Up"} disabled={valid ? false : true} />
         </AppFormik>
+
+        <View style={{flexDirection:"row", alignItems:"center", alignSelf:"center", marginTop: ww(200)}}>
+           <Text style={{color:"#71879C", fontWeight:"500", fontSize:16}}>Already have an account?</Text>
+           <Text style={{marginLeft:5, fontWeight:"600", color:"#0898A0", fontSize:16}} onPress={() => navigation.navigate("Login")}>Login</Text>
+        </View>
       </View>
     </ScrollView>
   );

@@ -7,8 +7,10 @@ import SubmitBtn from "../../Components/SubmitBtn";
 import PhoneNumberInput from "./PhoneNumberInput";
 import { Calendar} from "react-native-calendars";
 import DatePickeer from "./DatePickeer";
+import Button from "../../Components/Button";
+import { ww } from "../../responsive";
 
-const MoreAboutUser = () => {
+const MoreAboutUser = ({navigation}) => {
   const validationSchema = Yup.object().shape({
     firstName: Yup.string().label("First Name"),
     lastName: Yup.string().label("Last Name"),
@@ -113,7 +115,7 @@ const MoreAboutUser = () => {
             />
           )}
 
-          <SubmitBtn title={"Continue"} />
+          <Button title={"Continue"} style={{marginTop:ww(100)}} onPress={() => navigation.navigate("SignUpSuccess")}/>
         </AppFormik>
       </View>
     </ScrollView>

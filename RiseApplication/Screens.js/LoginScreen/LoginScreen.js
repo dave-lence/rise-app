@@ -11,8 +11,9 @@ import * as Yup from "yup";
 import AppFormik from "../../Components/AppFormik";
 import AppFormFields from "../../Components/AppFormFields";
 import SubmitBtn from "../../Components/SubmitBtn";
+import { ww } from "../../responsive";
 
-const LoginScreen = () => {
+const LoginScreen = ({navigation}) => {
   const validationSchema = Yup.object().shape({
     email: Yup.string().required().email().label("Email"),
     password: Yup.string()
@@ -48,7 +49,7 @@ const LoginScreen = () => {
   };
 
   return (
-    <ScrollView style={{ flex: 1, padding: 20 }}>
+    <ScrollView style={{ flex: 1, paddingHorizontal: ww(20) }}>
       {/* top description */}
       <View style={{ marginTop: 75, marginBottom: 40 }}>
         <Text style={{ fontSize: 20, fontWeight: "500" }}>Welcome back</Text>
@@ -99,14 +100,14 @@ const LoginScreen = () => {
           />
 
           {/* sign up button */}
-          <SubmitBtn title={"Login"}/>
+          <SubmitBtn title={"Login"} style={{marginTop:ww(80)}}/>
         </AppFormik>
 
 
          {/* forgotten password text */}
         <Text
           style={{
-            marginTop: 30,
+            marginTop:-100,
             color: "#0898A0",
             alignSelf: "center",
             fontWeight: "600",
@@ -119,9 +120,9 @@ const LoginScreen = () => {
 
 
 
-        <View style={{flexDirection:"row", alignItems:"center", alignSelf:"center", marginTop:200}}>
+        <View style={{flexDirection:"row", alignItems:"center", alignSelf:"center", marginTop:ww(350)}}>
            <Text style={{color:"#71879C", fontWeight:"500", fontSize:16}}>Dont have an account?</Text>
-           <Text style={{marginLeft:5, fontWeight:"600", color:"#0898A0", fontSize:16}}>Sign Up</Text>
+           <Text style={{marginLeft:5, fontWeight:"600", color:"#0898A0", fontSize:16}} onPress={() => navigation.navigate("SignUp")}>Sign Up</Text>
         </View>
       </View>
     </ScrollView>
