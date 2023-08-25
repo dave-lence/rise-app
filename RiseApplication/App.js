@@ -16,12 +16,13 @@ import { NavigationContainer } from "@react-navigation/native";
 import HomeScreen from "./Screens.js/HomeScreen/HomeScreen";
 import { myTheme } from "./Navigation/NavigationTheme";
 import CreatePlanScreen from "./Screens.js/CreatePlanScreen/CreatePlanScreen";
+import GoalScreen from "./Screens.js/CreatePlanScreen/GoalScreen";
 
 export default function App() {
   return (
     <NavigationContainer theme={myTheme}>
       <Screen>
-        <CreatePlanScreen />
+        <GoalScreen />
       </Screen>
       {/* <Auth /> */}
     </NavigationContainer>

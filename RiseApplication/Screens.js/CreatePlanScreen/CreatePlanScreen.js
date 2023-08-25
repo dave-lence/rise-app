@@ -1,15 +1,20 @@
-import { View, Text, TouchableOpacity, Image } from "react-native";
+import { View, Text,  Image } from "react-native";
 import React from "react";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+
 
 // custom files
-import { ww, windowWidth } from "../../responsive";
+import { ww, } from "../../responsive";
+import PlanHeader from "./PlanHeader";
+import Button from "../../Components/Button";
 import PlanList from "./PlanList";
+
 
 const CreatePlanScreen = () => {
   return (
     <View style={{ flex: 1, paddingHorizontal: ww(20) }}>
-      <Header />
+      <PlanHeader title={"Create a plan"}
+        iconName={"close"}
+      />
 
       {/* reach your goal faster */}
       <View style={{ alignItems: "center", gap: 20, marginVertical: ww(20) }}>
@@ -28,38 +33,32 @@ const CreatePlanScreen = () => {
         />
       </View>
 
-      <PlanList/>
+      <PlanList
+        iconName={"progress-question"}
+        title={"Give us a few details"}
+        description={
+          "Tell us what you want to achieve and we will help you get there"
+        }
+      />
+      <PlanList
+        iconName={"calendar-month"}
+        title={"Turn on auto-invest"}
+        description={
+          "The easiest way to get your investment working for you is to fund to periodically. "
+        }
+      />
+      <PlanList
+        iconName={"tools"}
+        title={"Modify as you progress"}
+        description={
+          "You are in charge. Make changes to your plan, from adding funds, funding source, adding money to your wallet and more."
+        }
+      />
+
+      <Button title={"Continue"} style={{ marginTop: ww(90) }} />
     </View>
   );
 };
 
 export default CreatePlanScreen;
 
-const Header = () => {
-  return (
-    <View style={{ flexDirection: "row" }}>
-      <TouchableOpacity
-        style={{
-          justifyContent: "center",
-          alignItems: "center",
-          padding: ww(12),
-          borderRadius: 25,
-          backgroundColor: "rgba(113, 135, 156, 0.10)",
-          marginRight: windowWidth / 6,
-        }}
-      >
-        <MaterialCommunityIcons name="close" size={24} color="#0898A0" />
-      </TouchableOpacity>
-
-      <Text
-        style={{
-          fontSize: ww(24),
-          fontWeight: "700",
-          alignSelf: "center",
-        }}
-      >
-        Create a plan
-      </Text>
-    </View>
-  );
-};
