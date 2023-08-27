@@ -3,6 +3,7 @@ import { Provider } from "react-redux";
 import store from "./Redux/store";
 import { useSelector, useDispatch } from "react-redux";
 import { setUser } from "./Redux/UserSlice";
+import { ToastProvider } from 'react-native-toast-notifications'
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import { StatusBar } from "expo-status-bar";
@@ -59,8 +60,10 @@ const AuthSession = () => {
 
 export default function App() {
   return (
+    <ToastProvider>
     <Provider store={store}>
      <AuthSession/>
     </Provider>
+    </ToastProvider>
   );
 }

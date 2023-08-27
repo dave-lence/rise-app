@@ -226,6 +226,7 @@ const ReviewScreen = ({ }) => {
             marginVertical: ww(10),
             marginBottom: ww(40),
           }}
+          onPress={() => navigation.navigate("HomeScreen")}
         />
       </ScrollView>
     </Screen>

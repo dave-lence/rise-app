@@ -8,11 +8,12 @@ import {
 import React, { useState } from "react";
 import axios from "axios";
 import * as Yup from "yup";
-import {useDispatch, useSelector } from "react-redux";
+import { useToast } from "react-native-toast-notifications";
+import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "../../Redux/UserSlice";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-// cutom files 
+// cutom files
 import AppFormik from "../../Components/AppFormik";
 import AppFormFields from "../../Components/AppFormFields";
 import SubmitBtn from "../../Components/SubmitBtn";
@@ -27,11 +28,10 @@ const LoginScreen = ({ navigation }) => {
       .min(8)
       .label("Password"),
   });
+  const toast = useToast();
 
   // initializing useDispatch
-  const dispatch = useDispatch()
- 
-
+  const dispatch = useDispatch();
 
   const [showPassword, setShowPassword] = useState(false);
   const [valid, setValid] = useState(false);
@@ -61,11 +61,30 @@ const LoginScreen = ({ navigation }) => {
         const { token, ...rest } = data;
         const respData = { token, user: { ...rest } };
         dispatch(setUser(respData.user));
-        AsyncStorage.setItem("user", JSON.stringify(respData.user))
-        AsyncStorage.setItem("token", JSON.stringify(respData.token))
+        AsyncStorage.setItem("user", JSON.stringify(respData.user));
+        AsyncStorage.setItem("token", JSON.stringify(respData.token));
         console.log("success", respData);
       })
-      .catch((error) => console.log("error", error));
+      .catch(({message}) => {
+        if(message){
+          toast.show(`${JSON.stringify(message)} Make sure your password is correct`, {
+            type: "warning",
+            placement: "bottom",
+            duration: 6000,
+            offset: 30,
+            animationType: "zoom-in",
+          });
+          console.log("error", error);
+        } else{
+          toast.show("Login you in", {
+            type: "success",
+            placement: "bottom",
+            duration: 4000,
+            offset: 30,
+            animationType: "slide-in",
+          });
+        }
+      });
   };
 
   // function to check if the forms are valid to enable the button
@@ -121,8 +140,8 @@ const LoginScreen = ({ navigation }) => {
             setIsLoading(true);
             setTimeout(() => {
               setIsLoading(false);
+              navigation.navigate("HomeScreen");
             }, 5000);
-            navigation.navigate("HomeScreen");
           }}
         >
           <AppFormFields
@@ -137,7 +156,7 @@ const LoginScreen = ({ navigation }) => {
             icon
             iconName={showPassword ? "eye-off" : "eye"}
             showPass={() => setShowPassword(!showPassword)}
-            placeholder={"Create Password"}
+            placeholder={"Enter your Password"}
             name={"password"}
             autoCorrect={false}
             autoCapitalize={"none"}

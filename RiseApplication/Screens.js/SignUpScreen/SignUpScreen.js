@@ -3,7 +3,7 @@ import React, { useRef, useState } from "react";
 import Checkbox from "expo-checkbox";
 import * as Yup from "yup";
 import Constants from "expo-constants";
-
+import { useToast } from "react-native-toast-notifications";
 
 // custom files
 import AppFormik from "../../Components/AppFormik";
@@ -11,7 +11,7 @@ import AppFormFields from "../../Components/AppFormFields";
 import SubmitBtn from "../../Components/SubmitBtn";
 import { ww } from "../../responsive";
 import Screen from "../../Components/Screen";
-
+import axios from "axios";
 
 const SignUpScreen = ({ navigation }) => {
   const phoneRegex = `^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$`;
@@ -35,9 +35,8 @@ const SignUpScreen = ({ navigation }) => {
   const [validUpperCase, setValidUpperCase] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [newUser, setNewUser] = useState("");
-  const [signUpError, setSignUpError] = useState("");
 
- 
+  const toast = useToast();
 
   const createUser = async ({
     email,
@@ -50,11 +49,13 @@ const SignUpScreen = ({ navigation }) => {
   }) => {
     const response = await fetch(
       "https://rise-rn-test-api-gb2v6.ondigitalocean.app/api/v1/users",
+
       {
         method: "POST",
         headers: {
           "Content-type": "application/json",
         },
+
         body: JSON.stringify({
           first_name: firstName,
           last_name: lastName,
@@ -72,12 +73,9 @@ const SignUpScreen = ({ navigation }) => {
         setNewUser(result);
       })
       .catch((error) => {
-        if (error) {
-          console.log(error);
-          Alert.alert(error);
-        } else {
-          console.log("success");
-        }
+       
+        console.log("error", error);
+        Alert.alert("messege")
       });
   };
 
@@ -102,153 +100,159 @@ const SignUpScreen = ({ navigation }) => {
   };
 
   return (
-   
-      <ScrollView style={{ flex: 1,marginTop: Constants.statusBarHeight, paddingHorizontal: ww(20) }} showsVerticalScrollIndicator={false}>
-        {/* top description */}
-        <View style={{ marginTop: 75, marginBottom: 40 }}>
-          <Text style={{ fontSize: 20, fontWeight: "500" }}>
-            Create an account
+    <ScrollView
+      style={{
+        flex: 1,
+        marginTop: Constants.statusBarHeight,
+        paddingHorizontal: ww(20),
+      }}
+      showsVerticalScrollIndicator={false}
+    >
+      {/* top description */}
+      <View style={{ marginTop: 75, marginBottom: 40 }}>
+        <Text style={{ fontSize: 20, fontWeight: "500" }}>
+          Create an account
+        </Text>
+        <Text
+          style={{
+            fontSize: 15,
+            color: "#71879C",
+            fontWeight: "400",
+            marginTop: 10,
+            paddingRight: 20,
+          }}
+        >
+          Start building your dollar-denominated investment portfolio.
+        </Text>
+      </View>
+
+      {/* login forms */}
+      <View>
+        <AppFormik
+          initialValues={{
+            firstName: "",
+            lastName: "",
+            userName: "",
+            phoneNumber: "",
+            dateOfBirth: "",
+            email: "",
+            password: "",
+          }}
+          validationSchema={validationSchema}
+          validate={(values) => {
+            checkValid(values);
+          }}
+          onSubmit={(value) => {
+            createUser(value);
+            setIsLoading(true);
+            setTimeout(() => {
+              setIsLoading(false);
+              navigation.navigate("SignUpSuccess");
+            }, 5000);
+          }}
+        >
+          <AppFormFields
+            placeholder={"First Name"}
+            name={"firstName"}
+            autoCorrect={false}
+            autoCapitalize={"none"}
+          />
+          <AppFormFields
+            placeholder={"Last Name"}
+            name={"lastName"}
+            autoCorrect={false}
+            autoCapitalize={"none"}
+          />
+          <AppFormFields
+            placeholder={"Username"}
+            name={"userName"}
+            autoCorrect={false}
+            autoCapitalize={"none"}
+          />
+          <AppFormFields
+            placeholder={"Phone Number"}
+            name={"phoneNumber"}
+            autoCorrect={false}
+            autoCapitalize={"none"}
+            keyboardType={"numeric"}
+          />
+          <AppFormFields
+            placeholder={"DOB"}
+            name={"dateOfBirth"}
+            autoCorrect={false}
+            autoCapitalize={"none"}
+          />
+          <AppFormFields
+            placeholder={"Email Address"}
+            name={"email"}
+            autoCorrect={false}
+            autoCapitalize={"none"}
+            keyboardType={"email-address"}
+          />
+
+          <AppFormFields
+            icon
+            iconName={showPassword ? "eye-off" : "eye"}
+            showPass={() => setShowPassword(!showPassword)}
+            placeholder={"Create Password"}
+            name={"password"}
+            autoCorrect={false}
+            autoCapitalize={"none"}
+            secureTextEntry={showPassword ? false : true}
+          />
+
+          {/* check boxes */}
+          <View style={{ marginTop: 10 }}>
+            <CheckBoxFields
+              description={"Minimum of 8 characters"}
+              value={valid8char}
+              onValueChange={setValid8char}
+            />
+            <CheckBoxFields
+              description={"One UPPERCASE character"}
+              value={validUpperCase}
+              onValueChange={setValidUpperCase}
+            />
+            <CheckBoxFields
+              description={"One unique character (e.g: !@#$%^&*?)"}
+              value={valid}
+              onValueChange={setValid}
+            />
+          </View>
+
+          {/* sign up button */}
+          <SubmitBtn
+            loading={isLoading}
+            title={"Sign Up"}
+            disabled={valid ? false : true}
+          />
+        </AppFormik>
+
+        <View
+          style={{
+            flexDirection: "row",
+            alignItems: "center",
+            alignSelf: "center",
+            marginVertical: ww(50),
+          }}
+        >
+          <Text style={{ color: "#71879C", fontWeight: "500", fontSize: 16 }}>
+            Already have an account?
           </Text>
           <Text
             style={{
-              fontSize: 15,
-              color: "#71879C",
-              fontWeight: "400",
-              marginTop: 10,
-              paddingRight: 20,
+              marginLeft: 5,
+              fontWeight: "600",
+              color: "#0898A0",
+              fontSize: 16,
             }}
+            onPress={() => navigation.navigate("Login")}
           >
-            Start building your dollar-denominated investment portfolio.
+            Login
           </Text>
         </View>
-
-        {/* login forms */}
-        <View>
-          <AppFormik
-            initialValues={{
-              firstName: "",
-              lastName: "",
-              userName: "",
-              phoneNumber: "",
-              dateOfBirth: "",
-              email: "",
-              password: "",
-            }}
-            validationSchema={validationSchema}
-            validate={(values) => {
-              checkValid(values);
-            }}
-            onSubmit={(value) => {
-              createUser(value);
-              setIsLoading(true);
-              setTimeout(() => {
-                setIsLoading(false);
-                navigation.navigate("SignUpSuccess");
-              }, 5000);
-            }}
-          >
-            <AppFormFields
-              placeholder={"First Name"}
-              name={"firstName"}
-              autoCorrect={false}
-              autoCapitalize={"none"}
-            />
-            <AppFormFields
-              placeholder={"Last Name"}
-              name={"lastName"}
-              autoCorrect={false}
-              autoCapitalize={"none"}
-            />
-            <AppFormFields
-              placeholder={"Username"}
-              name={"userName"}
-              autoCorrect={false}
-              autoCapitalize={"none"}
-            />
-            <AppFormFields
-              placeholder={"Phone Number"}
-              name={"phoneNumber"}
-              autoCorrect={false}
-              autoCapitalize={"none"}
-              keyboardType={"numeric"}
-            />
-            <AppFormFields
-              placeholder={"DOB"}
-              name={"dateOfBirth"}
-              autoCorrect={false}
-              autoCapitalize={"none"}
-            />
-            <AppFormFields
-              placeholder={"Email Address"}
-              name={"email"}
-              autoCorrect={false}
-              autoCapitalize={"none"}
-              keyboardType={"email-address"}
-            />
-
-            <AppFormFields
-              icon
-              iconName={showPassword ? "eye-off" : "eye"}
-              showPass={() => setShowPassword(!showPassword)}
-              placeholder={"Create Password"}
-              name={"password"}
-              autoCorrect={false}
-              autoCapitalize={"none"}
-              secureTextEntry={showPassword ? false : true}
-            />
-
-            {/* check boxes */}
-            <View style={{ marginTop: 10 }}>
-              <CheckBoxFields
-                description={"Minimum of 8 characters"}
-                value={valid8char}
-                onValueChange={setValid8char}
-              />
-              <CheckBoxFields
-                description={"One UPPERCASE character"}
-                value={validUpperCase}
-                onValueChange={setValidUpperCase}
-              />
-              <CheckBoxFields
-                description={"One unique character (e.g: !@#$%^&*?)"}
-                value={valid}
-                onValueChange={setValid}
-              />
-            </View>
-
-            {/* sign up button */}
-            <SubmitBtn
-              loading={isLoading}
-              title={"Sign Up"}
-              disabled={valid ? false : true}
-            />
-          </AppFormik>
-
-          <View
-            style={{
-              flexDirection: "row",
-              alignItems: "center",
-              alignSelf: "center",
-              marginVertical: ww(50),
-            }}
-          >
-            <Text style={{ color: "#71879C", fontWeight: "500", fontSize: 16 }}>
-              Already have an account?
-            </Text>
-            <Text
-              style={{
-                marginLeft: 5,
-                fontWeight: "600",
-                color: "#0898A0",
-                fontSize: 16,
-              }}
-              onPress={() => navigation.navigate("Login")}
-            >
-              Login
-            </Text>
-          </View>
-        </View>
-      </ScrollView>
+      </View>
+    </ScrollView>
   );
 };
 
