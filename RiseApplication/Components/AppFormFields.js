@@ -4,7 +4,7 @@ import AppTextInput from "./AppTextInput";
 import InputErrorText from "./InputErrorText";
 import { useFormikContext } from "formik";
 
-const AppFormFields = ({ icon, name, showPass, style, secureTextEntry, iconName,...otherProps }) => {
+const AppFormFields = ({ icon, name, showPass, leftIconName, leftIcon, style, secureTextEntry, iconName,...otherProps }) => {
 
     const {handleChange, setFieldTouched, touched, errors} = useFormikContext();
 
@@ -19,6 +19,8 @@ const AppFormFields = ({ icon, name, showPass, style, secureTextEntry, iconName,
         onChangeText={handleChange(name)}
         onBlur={() => setFieldTouched(name)}
         secureTextEntry={secureTextEntry}
+        leftIcon={leftIcon}
+        leftIconName={leftIconName}
       />
 
       <InputErrorText 

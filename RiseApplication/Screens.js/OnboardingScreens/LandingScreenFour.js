@@ -8,7 +8,10 @@ import {
 import React from "react";
 import { ww } from "../../responsive";
 
+
 const LandingScreenFour = ({ navigation }) => {
+
+
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "#F6FFFE", paddingHorizontal: ww(20) }}>
       <View
@@ -59,7 +62,7 @@ const LandingScreenFour = ({ navigation }) => {
             backgroundColor: "#0898A0",
             padding: 16,
             borderRadius: 5,
-            width: ww(335),
+            width: ww(365),
             alignItems: "center",
           }}
           onPress={() => navigation.navigate("SignUp")}
@@ -73,7 +76,7 @@ const LandingScreenFour = ({ navigation }) => {
             backgroundColor: "rgba(113, 135, 156, 0.10)",
             padding: 16,
             borderRadius: 5,
-            width: ww(335),
+            width: ww(365),
             alignItems: "center",
           }}
           onPress={() => navigation.navigate("Login")}

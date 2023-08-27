@@ -1,23 +1,29 @@
 import { View, Text } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import { ww } from "../../responsive";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
-const HomeHeader = () => {
+const HomeHeader = ({ userName }) => {
+ // const [currentTime, setCurrentTime] = useState();
+
+  var today = new Date();
+  var time = today.getHours() + ":" + today.getMinutes();
+  const currentTime = time < 12 ? "morning" : time < 17 ? "afternoon" : "evening";
+
+
   return (
     <View
       style={{
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "space-between",
-        
       }}
     >
       <View style={{ gap: 7 }}>
         <Text style={{ fontSize: ww(15), fontWeight: "400" }}>
-          Good morning ☀
+          Good {currentTime} ☀
         </Text>
-        <Text style={{ fontSize: ww(20), fontWeight: "400" }}>Deborah</Text>
+        <Text style={{ fontSize: ww(20), fontWeight: "400" }}>{userName}</Text>
       </View>
 
       <View style={{ flexDirection: "row", alignItems: "center", gap: 10 }}>
@@ -45,9 +51,9 @@ const HomeHeader = () => {
               borderRadius: 20,
               justifyContent: "center",
               alignItems: "center",
-              position:"absolute",
-              top:-10,
-              right:-10,
+              position: "absolute",
+              top: -10,
+              right: -10,
             }}
           >
             <Text

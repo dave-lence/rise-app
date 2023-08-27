@@ -6,14 +6,19 @@ import {
   ScrollView,
 } from "react-native";
 import React, { useState } from "react";
-import Checkbox from "expo-checkbox";
+import axios from "axios";
 import * as Yup from "yup";
+import {useDispatch, useSelector } from "react-redux";
+import { setUser } from "../../Redux/UserSlice";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
+// cutom files 
 import AppFormik from "../../Components/AppFormik";
 import AppFormFields from "../../Components/AppFormFields";
 import SubmitBtn from "../../Components/SubmitBtn";
 import { ww } from "../../responsive";
 
-const LoginScreen = ({navigation}) => {
+const LoginScreen = ({ navigation }) => {
   const validationSchema = Yup.object().shape({
     email: Yup.string().required().email().label("Email"),
     password: Yup.string()
@@ -23,10 +28,44 @@ const LoginScreen = ({navigation}) => {
       .label("Password"),
   });
 
+  // initializing useDispatch
+  const dispatch = useDispatch()
+ 
+
+
   const [showPassword, setShowPassword] = useState(false);
   const [valid, setValid] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [valid8char, setValid8char] = useState(false);
   const [validUpperCase, setValidUpperCase] = useState(false);
+
+  const LoginUser = async ({ email, password }) => {
+    axios
+      .post(
+        "https://rise-rn-test-api-gb2v6.ondigitalocean.app/api/v1/sessions",
+
+        // body of request
+        {
+          email_address: email,
+          password: password,
+        },
+        {
+          headers: {
+            "Content-type": "application/json",
+            //"Authorization": `Bearer ${token}`
+          },
+        }
+      )
+
+      .then(({ data }) => {
+        const { token, ...rest } = data;
+        const respData = { token, user: { ...rest } };
+        dispatch(setUser(respData.user));
+        AsyncStorage.setItem("user", JSON.stringify(respData.user))
+        console.log("success", respData);
+      })
+      .catch((error) => console.log("error", error));
+  };
 
   // function to check if the forms are valid to enable the button
   const checkValid = (values) => {
@@ -77,7 +116,12 @@ const LoginScreen = ({navigation}) => {
             checkValid(values);
           }}
           onSubmit={(value) => {
-            // console.log(value);
+            LoginUser(value);
+            setIsLoading(true);
+            setTimeout(() => {
+              setIsLoading(false);
+            }, 5000);
+            navigation.navigate("HomeScreen");
           }}
         >
           <AppFormFields
@@ -100,29 +144,49 @@ const LoginScreen = ({navigation}) => {
           />
 
           {/* sign up button */}
-          <SubmitBtn title={"Login"} style={{marginTop:ww(80)}}/>
+          <SubmitBtn
+            loading={isLoading}
+            title={"Login"}
+            style={{ marginTop: ww(80) }}
+          />
         </AppFormik>
 
-
-         {/* forgotten password text */}
+        {/* forgotten password text */}
         <Text
           style={{
-            marginTop:-100,
+            marginTop: -100,
             color: "#0898A0",
             alignSelf: "center",
             fontWeight: "600",
-            fontSize:16,
+            fontSize: 16,
           }}
           onPress={() => {}}
         >
           I forgot my Password
         </Text>
 
-
-
-        <View style={{flexDirection:"row", alignItems:"center", alignSelf:"center", marginTop:ww(350)}}>
-           <Text style={{color:"#71879C", fontWeight:"500", fontSize:16}}>Dont have an account?</Text>
-           <Text style={{marginLeft:5, fontWeight:"600", color:"#0898A0", fontSize:16}} onPress={() => navigation.navigate("SignUp")}>Sign Up</Text>
+        <View
+          style={{
+            flexDirection: "row",
+            alignItems: "center",
+            alignSelf: "center",
+            marginTop: ww(350),
+          }}
+        >
+          <Text style={{ color: "#71879C", fontWeight: "500", fontSize: 16 }}>
+            Dont have an account?
+          </Text>
+          <Text
+            style={{
+              marginLeft: 5,
+              fontWeight: "600",
+              color: "#0898A0",
+              fontSize: 16,
+            }}
+            onPress={() => navigation.navigate("SignUp")}
+          >
+            Sign Up
+          </Text>
         </View>
       </View>
     </ScrollView>

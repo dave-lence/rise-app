@@ -26,7 +26,7 @@ const DatePickeer = ({ onSelectDate, date }) => {
           {date}
         </Text>
         <TouchableOpacity onPress={onSelectDate}>
-          <MaterialCommunityIcons name="calendar" size={26} color="#0898A0" />
+          <MaterialCommunityIcons name="calendar-month" size={26} color="#0898A0" />
         </TouchableOpacity>
       </View>
     </View>

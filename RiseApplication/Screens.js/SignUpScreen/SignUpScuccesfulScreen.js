@@ -12,7 +12,7 @@ const SignUpScuccesfulScreen = ({navigation}) => {
       friction: 5, // Adjust friction to control bounce effect
       useNativeDriver: true,
     }).start();
-  });
+  },[]);
 
   return (
     <View style={{ flex: 1,  }}>

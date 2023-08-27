@@ -26,7 +26,7 @@ const Auth = () => {
         />        
         <Stack.Screen name='WelcomeTwo' 
          component={LandingScreenTwo}
-         options={{animation:"slide_from_right", headerLeft: null,}}
+         options={{animation:"slide_from_right", }}
         />        
         <Stack.Screen name='WelcomeThree' 
          component={LandingScreenThree}

@@ -1,8 +1,13 @@
-import { Text, Pressable, TouchableOpacity } from "react-native";
+import {
+  Text,
+  Pressable,
+  TouchableOpacity,
+  ActivityIndicator,
+} from "react-native";
 import React, { useState } from "react";
 import { useFormikContext } from "formik";
 
-const SubmitBtn = ({ title, style, disabled, onPress }) => {
+const SubmitBtn = ({ title, style, disabled, onPress, loading }) => {
   const { handleSubmit } = useFormikContext();
 
   return (
@@ -23,9 +28,12 @@ const SubmitBtn = ({ title, style, disabled, onPress }) => {
       android_ripple={{ color: "white" }}
       disabled={disabled}
       onPress={handleSubmit}
-    
     >
-      <Text style={{ color: "white", fontWeight: "500" }}>{title}</Text>
+      {loading ? (
+        <ActivityIndicator size={24} color={"#fff"} />
+      ) : (
+        <Text style={{ color: "white", fontWeight: "500" }}>{title}</Text>
+      )}
     </Pressable>
   );
 };

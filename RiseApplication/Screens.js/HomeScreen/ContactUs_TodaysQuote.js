@@ -1,8 +1,9 @@
 import { View, Text, TouchableOpacity } from "react-native";
-import React from "react";
-import { ww } from "../../responsive";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
+import { ww } from "../../responsive";
 const ContactUsTodaysQuote = () => {
   return (
     <View style={{ marginTop: ww(30) }}>
@@ -66,6 +67,28 @@ const ContactUsTodaysQuote = () => {
 export default ContactUsTodaysQuote;
 
 const TodayQuote = () => {
+  const [isLoading, setIsLoading] = useState();
+  const [quote, setQuote] = useState();
+
+  const getQuote = async () => {
+    try {
+      let response = await axios.get(
+        "https://rise-rn-test-api-gb2v6.ondigitalocean.app/api/v1/quotes"
+      );
+      setQuote(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    setTimeout(() => {
+      getQuote();
+    }, 2000);
+  }, []);
+
+  console.log(quote);
+
   return (
     <View
       style={{
@@ -90,9 +113,7 @@ const TodayQuote = () => {
           lineHeight: 22,
         }}
       >
-        We have no intention of rotating capital out of strong multi-year
-        investments because they’ve recently done well or because ‘growth’ has
-        out performed ‘value’.
+        {quote?.quote}
       </Text>
 
       <View
@@ -103,7 +124,7 @@ const TodayQuote = () => {
         }}
       >
         <Text style={{ fontWeight: "800", fontSize: ww(15), color: "#fff" }}>
-          Carl Sagan
+          {quote?.author}
         </Text>
 
         <TouchableOpacity

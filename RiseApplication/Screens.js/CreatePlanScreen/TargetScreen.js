@@ -11,25 +11,25 @@ import AppFormFields from "../../Components/AppFormFields";
 import SubmitBtn from "../../Components/SubmitBtn";
 import Screen from "../../Components/Screen";
 
-const GoalScreen = ({navigation}) => {
+const TargetScreen = ({ navigation }) => {
   const validationSchema = Yup.object().shape({
-    investment: Yup.string().required("Field Required").label("Investment"),
+    amount: Yup.number().required("Field Required").label("Amount"),
   });
 
-  const [progressAnim, setProgressAnim] = useState(0);
+  const [progressAnim, setProgressAnim] = useState(0.3);
   useEffect(() => {
     setTimeout(() => {
-      setProgressAnim(0.3);
-    }, 200);
+      setProgressAnim(0.6);
+    }, 300);
   }, []);
 
   return (
     <Screen style={{ flex: 1, paddingHorizontal: ww(20) }}>
-      <PlanHeader title={"Goal name"} iconName={"arrow-left-thin"} />
+      <PlanHeader title={"Target amount"} iconName={"arrow-left-thin"} />
 
       <View style={{ marginTop: ww(40) }}>
         <Text style={{ fontSize: ww(15), color: "#71879C", fontWeight: "400" }}>
-          Question 1 of 3
+          Question 2 of 3
         </Text>
         <Progress.Bar
           progress={progressAnim}
@@ -43,18 +43,23 @@ const GoalScreen = ({navigation}) => {
       {/* input section */}
       <View style={{ marginTop: ww(50) }}>
         <Text style={{ fontSize: ww(17), fontWeight: "700" }}>
-          What are you saving for
+          How much do you need?
         </Text>
 
         <AppFormik
-          initialValues={{ investment: "" }}
+          initialValues={{ amount: "" }}
           validationSchema={validationSchema}
-          onSubmit={({investment}) => {
-            console.log(investment);
-            navigation.navigate("TargetScreen", investment)
+          onSubmit={({amount}) => {
+            console.log(amount);
+            navigation.navigate("TargetDateScreen", amount);
           }}
         >
-          <AppFormFields name={"investment"} placeholder={"Investment"} />
+          <AppFormFields
+            leftIcon
+            leftIconName={"currency-ngn"}
+            name={"amount"}
+            placeholder={"840,000.00"}
+          />
 
           <SubmitBtn title={"continue"} style={{ marginTop: 20 }} />
         </AppFormik>
@@ -63,4 +68,4 @@ const GoalScreen = ({navigation}) => {
   );
 };
 
-export default GoalScreen;
+export default TargetScreen;

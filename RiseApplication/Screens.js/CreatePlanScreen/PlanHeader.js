@@ -1,12 +1,14 @@
 import { View, Text, TouchableOpacity, Image } from "react-native";
 import React from "react";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 
 // custom files
 import { ww, windowWidth } from "../../responsive";
 
 
 const PlanHeader = ({iconName, title}) => {
+  const navigation = useNavigation()
   return (
     <View style={{ flexDirection: "row" }}>
       <TouchableOpacity
@@ -18,6 +20,7 @@ const PlanHeader = ({iconName, title}) => {
           backgroundColor: "rgba(113, 135, 156, 0.10)",
           marginRight: windowWidth / 6,
         }}
+        onPress={() => navigation.goBack()}
       >
         <MaterialCommunityIcons name={iconName} size={24} color="#0898A0" />
       </TouchableOpacity>

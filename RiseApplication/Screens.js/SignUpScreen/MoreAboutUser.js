@@ -3,7 +3,6 @@ import React, { useRef, useState } from "react";
 import * as Yup from "yup";
 import AppFormFields from "../../Components/AppFormFields";
 import AppFormik from "../../Components/AppFormik";
-import SubmitBtn from "../../Components/SubmitBtn";
 import PhoneNumberInput from "./PhoneNumberInput";
 import { Calendar} from "react-native-calendars";
 import DatePickeer from "./DatePickeer";
@@ -11,6 +10,7 @@ import Button from "../../Components/Button";
 import { ww } from "../../responsive";
 
 const MoreAboutUser = ({navigation}) => {
+ 
   const validationSchema = Yup.object().shape({
     firstName: Yup.string().label("First Name"),
     lastName: Yup.string().label("Last Name"),

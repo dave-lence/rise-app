@@ -1,7 +1,12 @@
 import { View, Text, TouchableOpacity } from 'react-native'
 import React from 'react'
 
-const Button = ({onPress, title, style}) => {
+
+
+const Button = ({onPress, title, textStyle, style}) => {
+
+  
+
   return (
     <View>
       <TouchableOpacity 
@@ -17,7 +22,7 @@ const Button = ({onPress, title, style}) => {
        onPress={onPress}
        activeOpacity={0.7}
       >
-        <Text style={{color:'#fff', fontWeight:"500", fontSize:18}}>{title}</Text>
+        <Text style={[{color:'#fff', fontWeight:"500", fontSize:18}, textStyle]}>{title}</Text>
       </TouchableOpacity>
     </View>
   )
