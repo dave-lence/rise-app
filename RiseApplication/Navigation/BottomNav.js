@@ -10,6 +10,7 @@ import PlanScreeen from "../Screens.js/PlanScreen/PlanScreeen";
 import WalletScreen from "../Screens.js/WalletScreen/WalletScreen";
 import Feed from "../Screens.js/FeedScreen.js/Feed";
 import AccountScreen from "../Screens.js/AccpuntScreen/AccountScreen";
+import ProfileScreen from "../Screens.js/ProfileScreen.js/ProfileScreen";
 
 const Bottom = createBottomTabNavigator();
 const BottomNav = () => {
@@ -83,8 +84,8 @@ const BottomNav = () => {
         }}
       />
       <Bottom.Screen
-        name="Account"
-        component={AccountScreen}
+        name="Profile"
+        component={ProfileScreen}
         options={{
           tabBarIcon: ({ size, color, focused }) => (
             <MaterialCommunityIcons name="account" size={size} color={color} />

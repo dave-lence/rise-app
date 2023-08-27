@@ -7,7 +7,7 @@ import {
 import React, { useState } from "react";
 import { useFormikContext } from "formik";
 
-const SubmitBtn = ({ title, style, disabled, onPress, loading }) => {
+const SubmitBtn = ({ title, style, disabled, loading }) => {
   const { handleSubmit } = useFormikContext();
 
   return (

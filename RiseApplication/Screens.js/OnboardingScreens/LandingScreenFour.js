@@ -7,13 +7,14 @@ import {
 } from "react-native";
 import React from "react";
 import { ww } from "../../responsive";
+import Constants from "expo-constants";
 
 
 const LandingScreenFour = ({ navigation }) => {
 
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: "#F6FFFE", paddingHorizontal: ww(20) }}>
+    <View style={{ flex: 1, marginTop: Constants.statusBarHeight, backgroundColor: "#F6FFFE", paddingHorizontal: ww(20) }}>
       <View
         style={{ alignSelf: "center", marginTop: ww(100), height: ww(300), width: ww(300) }}
       >
@@ -84,7 +85,7 @@ const LandingScreenFour = ({ navigation }) => {
           <Text style={{ color: "#0898A0", fontWeight: "500" }}>Sign In</Text>
         </TouchableOpacity>
       </View>
-    </SafeAreaView>
+    </View>
   );
 };
 

@@ -2,7 +2,7 @@ import { View, Text, ScrollView } from "react-native";
 import React from "react";
 import { ww } from "../../responsive";
 import { LinearGradient } from "expo-linear-gradient";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 //custom files
 import HomeHeader from "./HomeHeader";

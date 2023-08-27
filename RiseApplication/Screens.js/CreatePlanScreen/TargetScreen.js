@@ -2,6 +2,7 @@ import { View, Text } from "react-native";
 import React, { useEffect, useState } from "react";
 import * as Progress from "react-native-progress";
 import * as Yup from "yup";
+import { useRoute } from "@react-navigation/native";
 
 //custom files
 import { ww } from "../../responsive";
@@ -11,7 +12,10 @@ import AppFormFields from "../../Components/AppFormFields";
 import SubmitBtn from "../../Components/SubmitBtn";
 import Screen from "../../Components/Screen";
 
-const TargetScreen = ({ navigation }) => {
+const TargetScreen = ({ route, navigation }) => {
+  const { investment } = route.params;
+//  console.log(investment);
+
   const validationSchema = Yup.object().shape({
     amount: Yup.number().required("Field Required").label("Amount"),
   });
@@ -22,6 +26,8 @@ const TargetScreen = ({ navigation }) => {
       setProgressAnim(0.6);
     }, 300);
   }, []);
+
+
 
   return (
     <Screen style={{ flex: 1, paddingHorizontal: ww(20) }}>
@@ -49,9 +55,9 @@ const TargetScreen = ({ navigation }) => {
         <AppFormik
           initialValues={{ amount: "" }}
           validationSchema={validationSchema}
-          onSubmit={({amount}) => {
-            console.log(amount);
-            navigation.navigate("TargetDateScreen", amount);
+          onSubmit={({ amount }) => {
+            //console.log(amount);
+            navigation.navigate("TargetDateScreen", { amount, investment });
           }}
         >
           <AppFormFields

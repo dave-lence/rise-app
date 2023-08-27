@@ -2,6 +2,7 @@ import { View, Text, ScrollView, ActivityIndicator, Alert } from "react-native";
 import React, { useRef, useState } from "react";
 import Checkbox from "expo-checkbox";
 import * as Yup from "yup";
+import Constants from "expo-constants";
 
 
 // custom files
@@ -101,8 +102,8 @@ const SignUpScreen = ({ navigation }) => {
   };
 
   return (
-    <Screen style={{ flex: 1, paddingHorizontal: ww(20) }}>
-      <ScrollView style={{ flex: 1 }} showsVerticalScrollIndicator={false}>
+   
+      <ScrollView style={{ flex: 1,marginTop: Constants.statusBarHeight, paddingHorizontal: ww(20) }} showsVerticalScrollIndicator={false}>
         {/* top description */}
         <View style={{ marginTop: 75, marginBottom: 40 }}>
           <Text style={{ fontSize: 20, fontWeight: "500" }}>
@@ -142,7 +143,7 @@ const SignUpScreen = ({ navigation }) => {
               setIsLoading(true);
               setTimeout(() => {
                 setIsLoading(false);
-                navigation.navigate("Login");
+                navigation.navigate("SignUpSuccess");
               }, 5000);
             }}
           >
@@ -248,7 +249,6 @@ const SignUpScreen = ({ navigation }) => {
           </View>
         </View>
       </ScrollView>
-    </Screen>
   );
 };
 

@@ -7,6 +7,8 @@ import GoalScreen from "../Screens.js/CreatePlanScreen/GoalScreen";
 import TargetScreen from "../Screens.js/CreatePlanScreen/TargetScreen";
 import TargetDateScreen from "../Screens.js/CreatePlanScreen/DateScreen";
 import BottomNav from "./BottomNav";
+import ReviewScreen from "../Screens.js/CreatePlanScreen/ReviewScreen";
+import CreatePlanScuccesfulScreen from "../Screens.js/CreatePlanScreen/CreatePlanSuccessful";
 
 const Home = createNativeStackNavigator();
 const HomeNavigator = () => {
@@ -37,6 +39,16 @@ const HomeNavigator = () => {
       <Home.Screen
         component={TargetDateScreen}
         name="TargetDateScreen"
+        options={{ animation: "slide_from_right", headerShown: false }}
+      />
+      <Home.Screen
+        component={ReviewScreen}
+        name="ReviewScreen"
+        options={{ animation: "slide_from_right", headerShown: false }}
+      />
+      <Home.Screen
+        component={CreatePlanScuccesfulScreen}
+        name="CreatePlanScuccesfulScreen"
         options={{ animation: "slide_from_right", headerShown: false }}
       />
     </Home.Navigator>

@@ -9,10 +9,11 @@ import {
 import React from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { ww } from "../../responsive";
+import Constants from "expo-constants";
 
 const LandingScreenTwo = ({ navigation }) => {
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: "#FEFAF7", paddingHorizontal: ww(20) }}>
+    <View style={{ flex: 1, marginTop: Constants.statusBarHeight, backgroundColor: "#FEFAF7", paddingHorizontal: ww(20) }}>
       <View
         style={{ alignSelf: "center", marginTop: 100, height: 300, width: 300 }}
       >
@@ -84,7 +85,7 @@ const LandingScreenTwo = ({ navigation }) => {
           <Ionicons name="arrow-forward" size={24} color="#FE7122" />
         </TouchableOpacity>
       </View>
-    </SafeAreaView>
+    </View>
   );
 };
 

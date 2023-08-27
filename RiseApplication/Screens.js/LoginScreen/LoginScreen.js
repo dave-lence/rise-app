@@ -62,6 +62,7 @@ const LoginScreen = ({ navigation }) => {
         const respData = { token, user: { ...rest } };
         dispatch(setUser(respData.user));
         AsyncStorage.setItem("user", JSON.stringify(respData.user))
+        AsyncStorage.setItem("token", JSON.stringify(respData.token))
         console.log("success", respData);
       })
       .catch((error) => console.log("error", error));

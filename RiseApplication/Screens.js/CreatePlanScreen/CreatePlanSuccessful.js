@@ -1,14 +1,15 @@
 import { View, Text, Animated } from "react-native";
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import Button from "../../Components/Button";
 import { useSelector } from "react-redux";
+import { setLocale } from "yup";
 
-const SignUpScuccesfulScreen = ({navigation}) => {
+const CreatePlanScuccesfulScreen = ({ navigation }) => {
   const bounceValue = useRef(new Animated.Value(0)).current;
   const user = useSelector((state) => state.user.user);
   const username = user ? user.username : " ";
-
+  const [isLoading, setIsLoading] = useState(false)
   useEffect(() => {
     setTimeout(() => {
       Animated.spring(bounceValue, {
@@ -20,7 +21,7 @@ const SignUpScuccesfulScreen = ({navigation}) => {
   }, []);
 
   return (
-    <View style={{ flex: 1,  }}>
+    <View style={{ flex: 1 }}>
       <View style={{ alignItems: "center", marginTop: 150 }}>
         <Animated.View
           style={{
@@ -55,7 +56,7 @@ const SignUpScuccesfulScreen = ({navigation}) => {
               textAlign: "center",
             }}
           >
-            You just created your Rise account
+            You just created your plan.
           </Text>
           <Text
             style={{
@@ -67,14 +68,25 @@ const SignUpScuccesfulScreen = ({navigation}) => {
               textAlign: "center",
             }}
           >
-            Welcome to Rise, let’s take you home
+            Well done, {username}
           </Text>
         </View>
       </View>
 
-      <Button title={"Okay"} style={{marginTop:250 }} onPress={() => navigation.navigate("Login")} />
+      <Button
+      loading={isLoading}
+        title={"Okay"}
+        style={{ marginTop: 250 }}
+        onPress={() => {
+            setIsLoading(true)
+            setTimeout(() => {
+                 setLocale(false)
+                navigation.navigate("HomeScreen")
+            }, 4000);
+        }}
+      />
     </View>
   );
 };
 
-export default SignUpScuccesfulScreen;
+export default CreatePlanScuccesfulScreen;

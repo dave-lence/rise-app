@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 const DatePickeer = ({ onSelectDate, date }) => {
+
   return (
     <View>
       <View

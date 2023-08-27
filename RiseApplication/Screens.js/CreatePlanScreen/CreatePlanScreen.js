@@ -1,6 +1,7 @@
 import { View, Text,  Image } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
+import Constants from "expo-constants";
 
 // custom files
 import { ww, } from "../../responsive";
@@ -12,8 +13,9 @@ import Screen from "../../Components/Screen";
 
 const CreatePlanScreen = ({}) => {
   const navigation = useNavigation()
+  
   return (
-    <Screen style={{flex: 1, paddingHorizontal: ww(20)}}>
+    <View style={{flex: 1, marginTop: Constants.statusBarHeight, paddingHorizontal: ww(20)}}>
       <PlanHeader title={"Create a plan"}
         iconName={"close"}
       />
@@ -58,7 +60,7 @@ const CreatePlanScreen = ({}) => {
       />
 
       <Button title={"Continue"} style={{ marginTop: ww(90)  }} onPress={() => navigation.navigate("GoalSceen")} />
-    </Screen>
+    </View>
   );
 };
 

@@ -28,6 +28,8 @@ import BottomNav from "./Navigation/BottomNav";
 import HomeNavigator from "./Navigation/HomeNavigator";
 import ReviewScreen from "./Screens.js/CreatePlanScreen/ReviewScreen";
 import { useEffect } from "react";
+import CreatePlanScuccesfulScreen from "./Screens.js/CreatePlanScreen/CreatePlanSuccessful";
+import ProfileScreen from "./Screens.js/ProfileScreen.js/ProfileScreen";
 
 const AuthSession = () => {
   const user = useSelector((state) => state.user.user);
@@ -50,7 +52,7 @@ const AuthSession = () => {
 
   return (
     <NavigationContainer theme={myTheme}>
-      {user ? <HomeNavigator/> : <Auth />}
+      {user ? <HomeNavigator/>  : <Auth />}
     </NavigationContainer>
   );
 };
@@ -58,7 +60,7 @@ const AuthSession = () => {
 export default function App() {
   return (
     <Provider store={store}>
-      <AuthSession/>
+     <AuthSession/>
     </Provider>
   );
 }

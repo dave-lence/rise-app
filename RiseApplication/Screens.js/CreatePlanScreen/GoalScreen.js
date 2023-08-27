@@ -1,5 +1,5 @@
 import { View, Text } from "react-native";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, } from "react";
 import * as Progress from "react-native-progress";
 import * as Yup from "yup";
 
@@ -50,8 +50,8 @@ const GoalScreen = ({navigation}) => {
           initialValues={{ investment: "" }}
           validationSchema={validationSchema}
           onSubmit={({investment}) => {
-            console.log(investment);
-            navigation.navigate("TargetScreen", investment)
+            //console.log(investment);
+            navigation.navigate("TargetScreen", {investment})
           }}
         >
           <AppFormFields name={"investment"} placeholder={"Investment"} />

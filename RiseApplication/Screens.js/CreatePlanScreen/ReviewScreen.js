@@ -1,8 +1,11 @@
 import { View, Text, ScrollView } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import { LineChart } from "react-native-chart-kit";
 import { Dimensions } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
+import axios from "axios";
+import { useRoute } from "@react-navigation/native";
 
 // custom files
 import Screen from "../../Components/Screen";
@@ -10,7 +13,43 @@ import { ww } from "../../responsive";
 import PlanHeader from "./PlanHeader";
 import Button from "../../Components/Button";
 
-const ReviewScreen = () => {
+const ReviewScreen = ({ }) => {
+  const navigation = useNavigation();
+  const [isLoading, setIsLoading] = useState(false);
+  //const {investment, amount, date} = route.params
+  const { params :{ investment, amount, date }} = useRoute() ;
+  console.log(investment, amount, date);
+
+  const createPlan = async ({}) => {
+
+    axios
+      .post(
+        "https://rise-rn-test-api-gb2v6.ondigitalocean.app/api/v1/plans",
+
+        // body of request
+        {
+          plan_name: investment,
+          target_amount: amount,
+          maturity_date: date,
+        },
+        {
+          headers: {
+            "Content-type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+
+      .then(({ data }) => {
+        const { token, ...rest } = data;
+        const respData = { token, user: { ...rest } };
+        dispatch(setUser(respData.user));
+        AsyncStorage.setItem("user", JSON.stringify(respData.user));
+        console.log("success", respData);
+      })
+      .catch((error) => console.log("error", error));
+  };
+
   return (
     <Screen style={{ flex: 1, paddingHorizontal: ww(20) }}>
       <ScrollView style={{ flex: 1 }} showsVerticalScrollIndicator={false}>
@@ -165,8 +204,29 @@ const ReviewScreen = () => {
           These are your starting settings, they can always be updated.
         </Text>
 
-        <Button title={"Agree & Continue"} style={{ elevation:8, width:ww(365), marginVertical:ww(10)}}/>
-        <Button title={"Start over"} textStyle={{color:"rgba(8, 152, 160, 1)"}} style={{ backgroundColor:"rgba(113, 135, 156, 0.10)", width:ww(365), marginVertical:ww(10), marginBottom:ww(40)}} />
+        <Button
+          loading={isLoading}
+          onPress={() => {
+            createPlan()
+            setIsLoading(true);
+            setTimeout(() => {
+              setIsLoading(false);
+              navigation.navigate("CreatePlanScuccesfulScreen");
+            }, 5000);
+          }}
+          title={"Agree & Continue"}
+          style={{ elevation: 8, width: ww(365), marginVertical: ww(10) }}
+        />
+        <Button
+          title={"Start over"}
+          textStyle={{ color: "rgba(8, 152, 160, 1)" }}
+          style={{
+            backgroundColor: "rgba(113, 135, 156, 0.10)",
+            width: ww(365),
+            marginVertical: ww(10),
+            marginBottom: ww(40),
+          }}
+        />
       </ScrollView>
     </Screen>
   );
