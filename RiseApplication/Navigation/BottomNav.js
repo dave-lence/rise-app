@@ -4,12 +4,10 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 //custom files
-import HomeNavigator from "./HomeNavigator";
 import HomeScreen from "../Screens.js/HomeScreen/HomeScreen";
 import PlanScreeen from "../Screens.js/PlanScreen/PlanScreeen";
 import WalletScreen from "../Screens.js/WalletScreen/WalletScreen";
 import Feed from "../Screens.js/FeedScreen.js/Feed";
-import AccountScreen from "../Screens.js/AccpuntScreen/AccountScreen";
 import ProfileScreen from "../Screens.js/ProfileScreen.js/ProfileScreen";
 
 const Bottom = createBottomTabNavigator();
